@@ -8,7 +8,6 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    console.log('I am auth context', user)
 
     useEffect(() => {
         const initialize  = async () => {
@@ -19,7 +18,6 @@ const AuthProvider = ({ children }) => {
                     const response = await api.get('/user', {
                         headers: { Authorization: `Bearer ${token}` }
                     });
-                    console.log('I am the response', response.data)
                     setUser(response.data);
                 }
             } catch (err) {
@@ -32,18 +30,6 @@ const AuthProvider = ({ children }) => {
 
     }, []);
 
-    // const login = async (email, password) => {
-    //     try {
-    //         const {token} = await authLogin({email, password});
-    //         const userResponse = await api.get('/user', {
-    //             headers: { Authorization: `Bearer ${token}` }
-    //         });
-    //         setUser(userResponse.data);
-    //     } catch (err) {
-    //         console.error("Login failed:", err);
-    //         setError("Login failed. Please check your credentials and try again.");
-    //     }
-    // };
 
 
     return (

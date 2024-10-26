@@ -5,6 +5,7 @@ import cors from 'cors'
 import {router as authRouter} from "./routers/auth_Router.js"
 import {router as restaurantRouter} from "./routers/restaurant_Router.js"
 import {router as userRouter} from "./routers/user_Router.js"
+import {router as adminRouter} from "./routers/Users_Router.js"
 
 
 const app = express();
@@ -39,3 +40,4 @@ main();
 app.use('/', authRouter);
 app.use('/', restaurantRouter);
 app.use('/', userRouter);
+app.use('/', adminRouter);

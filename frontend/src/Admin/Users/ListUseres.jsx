@@ -1,46 +1,54 @@
-import { useRestaurantContext } from "../../Context/RestaurantContext.js";
-import RestaurantButton from "./buttons/RestaurantButtons.jsx";
+import { useState } from "react";
+import UpdateUserModal from './UpdateUser.jsx'; // Adjust the path as needed
+import { useUser } from "../../Context/RestaurantContext.js";
+import UserButton from "./Buttons/UserButton.jsx";
+import { useUsersContext } from "../../Context/UserContext.js";
+import {UpdateUser} from '../../Services/User/UpdateUser.js'
 
-const ListRestaurant = () => {
-  const { restaurants, loading } = useRestaurantContext();
+
+const ListUser = () => {
+  const { users, loading } = useUsersContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  console.log('hhhhhhhhhhhhhhhhhh', users);
+  const handleUpdateClick = (user) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
+
+  const handleUpdate = (updatedUser) => {
+    UpdateUser(updatedUser);
+    setSelectedUser(null);
+  };
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="font-[sans-serif] overflow-x-auto">
-      <RestaurantButton />
+      <UserButton />
       <table className="min-w-full bg-white">
         <thead className="bg-gray-800 whitespace-nowrap">
           <tr>
-            <th className="p-4 text-left text-sm font-medium text-white">
-              Name
-            </th>
-            <th className="p-4 text-left text-sm font-medium text-white">
-              Address
-            </th>
-            <th className="p-4 text-left text-sm font-medium text-white">
-              Gerant
-            </th>
-            <th className="p-4 text-left text-sm font-medium text-white">
-              Menu
-            </th>
-            <th className="p-4 text-left text-sm font-medium text-white">
-              Actions
-            </th>
+            <th className="p-4 text-left text-sm font-medium text-white">Name</th>
+            <th className="p-4 text-left text-sm font-medium text-white">Email</th>
+            <th className="p-4 text-left text-sm font-medium text-white">Role</th>
+            <th className="p-4 text-left text-sm font-medium text-white">Status</th>
+            <th className="p-4 text-left text-sm font-medium text-white">Actions</th>
           </tr>
         </thead>
         <tbody className="whitespace-nowrap">
-          {restaurants.map((restaurant) => (
-            <tr key={restaurant.id} className="even:bg-blue-50">
-              <td className="p-4 text-sm text-black">{restaurant.name}</td>
-              <td className="p-4 text-sm text-black">{restaurant.address}</td>
-              <td className="p-4 text-sm text-black">{restaurant.gerant}</td>
-              <td className="p-4 text-sm text-black">{restaurant.menu}</td>
+          {users.map((user) => (
+            <tr key={user.id} className="even:bg-blue-50">
+              <td className="p-4 text-sm text-black">{user.name}</td>
+              <td className="p-4 text-sm text-black">{user.email}</td>
+              <td className="p-4 text-sm text-black">{user.role}</td>
+              <td className="p-4 text-sm text-black">{user.status}</td>
               <td className="p-4">
-                <button className="mr-4" title="Edit">
-                  <svg
+                <button onClick={() => handleUpdateClick(user)} className="mr-4" title="Edit">
+                <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-5 fill-blue-500 hover:fill-blue-700"
                     viewBox="0 0 348.882 348.882"
@@ -56,7 +64,7 @@ const ListRestaurant = () => {
                   </svg>
                 </button>
                 <button className="mr-4" title="Delete">
-                  <svg
+                <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-5 fill-red-500 hover:fill-red-700"
                     viewBox="0 0 24 24"
@@ -76,8 +84,17 @@ const ListRestaurant = () => {
           ))}
         </tbody>
       </table>
+
+      {selectedUser && (
+        <UpdateUserModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          user={selectedUser}
+          onUpdate={handleUpdate}
+        />
+      )}
     </div>
   );
 };
 
-export default ListRestaurant;
+export default ListUser;

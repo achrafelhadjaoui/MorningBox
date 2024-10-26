@@ -7,11 +7,10 @@ const Hero = () => {
             <h1 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl lg:text-7xl">
               Welcome to
               <br className="xl:hidden" />
-              <span className="text-indigo-400"> Premium Delights</span>
+              <span className="text-indigo-400"> Our   <h1>Cafe<span className="text-yellow-500">Terea</span></h1></span>
             </h1>
             <p className="max-w-md mx-auto text-lg text-gray-300 sm:text-xl mt-4 md:mt-6 md:max-w-3xl">
-              Elevate your culinary experience with our exclusive premium
-              services. Indulge in exquisite flavors and extraordinary moments.
+             Browse our deleciouse Menu
             </p>
             <div className="mt-12 flex max-sm:flex-col sm:justify-center lg:justify-start gap-4">
               <div className="rounded-md shadow">
@@ -30,7 +29,7 @@ const Hero = () => {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://readymadeui.com/hotel-img.webp"
+            src="/public/hero.png"
             alt="Delicious Food"
           />
         </div>

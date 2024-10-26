@@ -1,5 +1,6 @@
-import Hero from "../components/Hero/HeroSection";
-import { useAuth } from "../Context/AuthContext";
+import Cards from "../components/Carts/ListCards.jsx";
+import Hero from "../components/Hero/HeroSection.jsx";
+import { useAuth } from "../Context/AuthContext.js";
 
 const Home = () => {
   const { user } = useAuth();
@@ -7,12 +8,9 @@ const Home = () => {
 
   return (
     <>
-    {user ?
-    <h1>{user.user.name}</h1>
-    :
-    console.log("")
-}
+    
       <Hero />
+      <Cards />
     </>
   );
 };

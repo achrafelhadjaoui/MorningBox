@@ -28,7 +28,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       toast.success("Login successful!");
-      // navigate("/register");
+      navigate("/");
     } catch (err) {
       console.error("Failed to login", err);
       toast.error("Failed to login. Please check your credentials.");
